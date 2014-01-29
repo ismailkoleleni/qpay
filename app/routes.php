@@ -43,12 +43,31 @@
 
 	//route to do testing 
 	Route::get('/testing',function(){
-		     $transaction=Transaction::create(['summary'=>'Wali Nyama na Kuku', 
-							      'amount'=>'1500 Tsh', 
-							      'sender_id'=>'49', 
-							      'receiver_id'=>'50']);
-		      if($transaction){ echo "Successfully Done!";}else{ echo "Un Successfully"; }
+			// $acc=Account::find(52)->individual;
+			// echo $acc->first_name;
 
+			//return Account::all();
+			
+			// $sender=DB::table('individuals')->where('account_id',50)->first();
+			// foreach ($sender as $value) {
+			// 	echo $value->first_name;
+			// }
+
+			return Transaction::create(array(
+					'sender_id'=>52,
+					'receiver_id'=>51,
+					'summary'=>'Wali Maharagwe na Matunda',
+					'amount'=>1600
+					));
+
+
+			// if(Transaction::create(array('summary'=>'Wali Nyama Na Matunda','receiver_id'=>51,'amount'=>'2000','sender_id'=>52))){
+			// 	echo "Success Transfer";
+			// }
+
+
+			// $individual=Account::find(49)->individual;
+		 //     var_dump($individual->first_name);
 			});
 	
 	//Route::get('/about','PagesController@about');

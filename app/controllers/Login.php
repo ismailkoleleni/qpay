@@ -29,12 +29,13 @@ class Login extends BaseController {
 		$validator = Validator::make(Input::only(['first_name','last_name','email','password','password_confirmation']), Login::$rules);
  
 	    if ($validator->passes()) {
-	       
+	       //if passes form validation
 	        $account_data=array(
 					'email'=>Input::get('email'),
 					'password'=>Hash::make(Input::get('password')),
 					'account_type'=>'Individual'
 				);
+	        //new account is created here
 			$new_account=Account::create($account_data);
 
 			$individual = array(
@@ -46,14 +47,23 @@ class Login extends BaseController {
 					'phone'=>Input::get('individual_phone'),
 					'account_id'=>$new_account->id
 				);
-
+			//new individual is created here
 			$new_individual=Individual::create($individual);
 
-			if($new_individual){
 
+			$credit_data=array(
+					'currency' => 'Tsh',
+					'amount' => 0,
+					'account_id' =>$new_account->id
+					);
+			//new credit row is created for this user
+			$new_credit=Credit::create($credit_data);
+
+
+			if($new_account && $new_individual && $new_credit){
+				//if successfully created a new individual, return to signup page with success message
 				return Redirect::to('signup/individual')->with('success_message', 'Thanks for registering!');
-				//echo "Successfull Added Individual".Individual::find(39);
-
+				
 			}else{
 				echo "Failed to add individual";
 			}

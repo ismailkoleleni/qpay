@@ -2,7 +2,7 @@
 @section('content_pane')
 	<div class="span9">
 				<?php 
-				$individual=Account::find(Auth::user()->id); 
+				$individual=Account::find(Auth::user()->id)->individual; 
 				//$individual=Individual::account()->find($account->id); 
 				?>
 				<h1 class="page-title">

@@ -11,27 +11,27 @@
 								
 			<div class="stat-holder">						
 				<div class="stat">							
-					<span>56</span>							
+					<span>{{ Account::find(Auth::user()->id)->transaction->count() }}</span>							
 					Total Transactions							
 				</div> <!-- /stat -->						
 			</div> <!-- /stat-holder -->
 			<div class="stat-holder">						
 				<div class="stat">							
-					<span>42</span>							
+					<span>{{ Account::find(Auth::user()->id)->transaction->count() }}</span>							
 					Complete Transactions							
 				</div> <!-- /stat -->						
 			</div> <!-- /stat-holder -->
 			
 			<div class="stat-holder">						
 				<div class="stat">							
-					<span>42</span>							
+					<span>{{ "0" }}</span>							
 					Pending Transactions							
 				</div> <!-- /stat -->						
 			</div> <!-- /stat-holder -->
 			
 			<div class="stat-holder">						
 				<div class="stat">							
-					<span>96,000 Tsh</span>							
+					<span>{{ Transaction::where('sender_id',Auth::user()->id)->sum('amount') }} Tsh</span>							
 					Total Expenditure							
 				</div> <!-- /stat -->						
 			</div> <!-- /stat-holder -->

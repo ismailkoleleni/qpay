@@ -1,7 +1,7 @@
 <?php
 
 class Individuals extends BaseController {
-
+	
 	public function index()
 	{	
 		//$User=Account::find(Auth::user()->id);

@@ -21,12 +21,12 @@
 								
 								<div class="widget-content">
 									<?php //$transactions=Account::find(Auth::user()->id)->transaction; 
-										$transactions=Transaction::find(1);
-										foreach (Account::with('transaction')->get() as $transaction)
-											{
-											    echo $Account->transaction->summary;
-											}
-										//var_dump($transactions);
+										//$transactions=Transaction::find(2);
+
+										// $transactions = DB::table('transactions')->where('sender_id',Auth::user()->id)->get();
+										//Account::find(50)->with('transaction')->get()
+									//$transactions=Account::find(50)->transaction->get();
+										//echo $transactions->summary;
 									?>
 
 									<table class="table table-striped table-bordered">
@@ -42,12 +42,20 @@
 										</thead>
 										
 										<tbody>
+										<?php
+										$transactions = Account::find(Auth::user()->id)->transaction;
+										//var_dump($transactions);
+
+										?>
+										@foreach($transactions as $transaction)
 											<tr>
-												<td>1</td>
-												<td>Cafeteria 1</td>
-												<td>Meal= Wali + Maarage ...</td>
-												<td>Tsh. 800 </td>
-												<td>Mon 19th Dec 2013 1923hrs</td>
+												<!-- $sender=DB::table('individuals')->where('account_id',$transaction->receiver_id)->first();
+												-->
+												 <td>{{ $transaction->id }}</td>
+												<td>{{ Account::find($transaction->receiver_id)->email }}</td>
+												<td>{{ $transaction->summary }}</td>
+												<td>{{ $transaction->amount }}</td>
+												<td>{{ $transaction->created_at }}s</td>
 												<td class="action-td">
 													<a href="javascript:;" class="btn btn-small btn-warning">
 														<i class="icon-ok"></i>								
@@ -57,96 +65,10 @@
 													</a>
 												</td>
 											</tr>
-											<tr>
-												<td>2</td>
-												<td>Cafeteria 2</td>
-												<td>Meal= Wali + Maarage ...</td>
-												<td>Tsh. 800 </td>
-												<td>Mon 20th Dec 2013 1323hrs</td>
-												<td class="action-td">
-													<a href="javascript:;" class="btn btn-small btn-warning">
-														<i class="icon-ok"></i>								
-													</a>						
-													<a href="javascript:;" class="btn btn-small">
-														<i class="icon-remove"></i>						
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>Cafeteria 1</td>
-												<td>Meal= Wali + Maarage ...</td>
-												<td>Tsh. 600 </td>
-												<td>Mon 20th Dec 2013 1633hrs</td>
-												<td class="action-td">
-													<a href="javascript:;" class="btn btn-small btn-warning">
-														<i class="icon-ok"></i>								
-													</a>						
-													<a href="javascript:;" class="btn btn-small">
-														<i class="icon-remove"></i>						
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>4</td>
-												<td>Hillpark cafe</td>
-												<td>Meal=Wali + Samaki ...</td>
-												<td>Tsh. 3500 </td>
-												<td>Mon 21th Dec 2013 1239hrs</td>
-												<td class="action-td">
-													<a href="javascript:;" class="btn btn-small btn-warning">
-														<i class="icon-ok"></i>								
-													</a>						
-													<a href="javascript:;" class="btn btn-small">
-														<i class="icon-remove"></i>						
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>5</td>
-												<td>Coet 1</td>
-												<td>Meal= matunda ...</td>
-												<td>Tsh. 1000 </td>
-												<td>Mon 21th Dec 2013 1903hrs</td>
-												<td class="action-td">
-													<a href="javascript:;" class="btn btn-small btn-warning">
-														<i class="icon-ok"></i>								
-													</a>						
-													<a href="javascript:;" class="btn btn-small">
-														<i class="icon-remove"></i>						
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>6</td>
-												<td>Cafeteria 1</td>
-												<td>Meal= Wali + Nyama ...</td>
-												<td>Tsh. 1600 </td>
-												<td>Mon 22th Dec 2013 1223hrs</td>
-												<td class="action-td">
-													<a href="javascript:;" class="btn btn-small btn-warning">
-														<i class="icon-ok"></i>								
-													</a>						
-													<a href="javascript:;" class="btn btn-small">
-														<i class="icon-remove"></i>						
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>7</td>
-												<td>Cafeteria 1</td>
-												<td>Meal= Chipsi + Mayai ...</td>
-												<td>Tsh. 1500 </td>
-												<td>Mon 23th Dec 2013 2343hrs</td>
-												<td class="action-td">
-													<a href="javascript:;" class="btn btn-small btn-warning">
-														<i class="icon-ok"></i>								
-													</a>						
-													<a href="javascript:;" class="btn btn-small">
-														<i class="icon-remove"></i>						
-													</a>
-												</td>
-											</tr>
+										@endforeach
+												
+											
+											
 										</tbody>
 									</table>
 								

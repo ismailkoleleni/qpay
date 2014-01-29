@@ -11,11 +11,16 @@ class Account extends Eloquent implements UserInterface, RemindableInterface {
 	protected $fillable = array('email','password','account_type');
 
 	public function individual(){
-		return $this->hasOne('Individual');
+		return $this->hasOne('Individual','account_id','id');
 	}
 	public function transaction(){
-		return $this->hasMany('Transaction');
+		return $this->hasMany('Transaction','sender_id','id');
 	}
+	public function credit(){
+		return $this->hasOne('credit','account_id','id');
+	}
+
+
 	public function getAuthIdentifier()
 	{
 		return $this->getKey();

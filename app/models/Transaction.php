@@ -1,18 +1,15 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
-class Transaction extends Eloquent{
-	
+class Transaction extends Eloquent {
+	protected $guarded=array('id');
 	protected $fillable=array('summary','amount','sender_id','receiver_id');
 
 	public function individual(){
-		return $this->belongsTo('Individual');
+		return $this->belongsTo('Individual','id','sender_id');
 
 	}
 	public function account(){
-		return $this->belongsTo('Account','sender_id');
+		return $this->belongsTo('Account');
 
 	}
 }

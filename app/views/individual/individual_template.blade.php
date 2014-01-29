@@ -3,7 +3,10 @@
 @section('topbar')
 		
 <div class="navbar navbar-fixed-top">
-	<?php $individual=Individual::where('account_id',Auth::user()->id); $account=Account::find(Auth::user()->id); ?>
+	<?php 
+		$individual_data=Account::find(Auth::user()->id)->individual;
+		$credit=Account::find(Auth::user()->id)->credit;
+	?>
 													
 	<div class="navbar-inner top_header_custom">
 		
@@ -21,7 +24,7 @@
 				<ul class="nav pull-right">
 					<li class="dropdown">
 						<a data-toggle="dropdown" class="dropdown-toggle " href="#">
-							Jaxon Isack <b class="caret"></b>							
+							{{ $individual_data->first_name." ".$individual_data->last_name }}<b class="caret"></b>							
 						</a>
 						<ul class="dropdown-menu">
 							<li>
@@ -69,12 +72,12 @@
 				
 					<div class="account-details">
 					
-						<span class="account-name">Jaxon Isack</span>
-						<span class="account-role">Student</span>
+						<span class="account-name">{{ $individual_data->first_name." ".$individual_data->last_name }}</span>
+						<span class="account-role">{{ $individual_data->account_type }}</span>
 						<span class="account-actions"> <a href="profile">Profile</a> | <a href="profile">Edit Settings</a></span>
 						
 					</div> <!-- /account-details -->
-				<span class="badge" style="text-align:center;">96,000 Tsh</span>
+				<span class="badge" style="text-align:center;">{{ $credit->amount." ".$credit->currency }}</span>
 						
 				</div> <!-- /account-container -->
 				
